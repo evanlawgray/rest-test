@@ -20,15 +20,44 @@ $(function() {
     return finalBalance;
   }
 
-function showBalance(balance) {
-  const balanceReadout = $('#balance-readout')
+  function showBalance(balance) {
+    const balanceReadout = $('#balance-readout')
 
-  if(balance >= 0) {
-  balanceReadout.empty().append(`<span class="green">$ ${balance}</span>`);
-  } else {
-  balanceReadout.empty().append(`<span class="red">$ ${balance}</span>`);
+    if(balance >= 0) {
+    balanceReadout.empty().append(`<span class="green">$ ${balance}</span>`);
+    } else {
+    balanceReadout.empty().append(`<span class="red">$ ${balance}</span>`);
+    }
   }
-}
+
+  function formatLedgerData(ledgerData) {
+    if (!ledgerData) return 'N/A';
+    return ledgerData.split(',').join('&#9657');
+  }
+
+  function showTransactions() {
+    const transactionsTable = $('.account-info');
+
+    for(let i = 1; i < allTransactions.length; i++ ) {
+      if(i % 2 === 0) {
+        let transactionElement = `<div class="table-row green">
+                                  <p class="date">${allTransactions[i].Date}</p>
+                                  <p class="company">${allTransactions[i].Company}</p>
+                                  <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                  <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                </div>`
+        transactionsTable.append(transactionElement)
+        } else {
+        let transactionElement = `<div class="table-row">
+                                    <p class="date">${allTransactions[i].Date}</p>
+                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                    <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                  </div>`
+        transactionsTable.append(transactionElement)
+        }
+    }
+  }
 
   function getRemainingPages(totalPages, pagePromises) {
     for(let i = 1; i < totalPages; i++ ) {
@@ -52,6 +81,7 @@ function showBalance(balance) {
     }).then(transactions => {
       allTransactions = [...transactions];
       showBalance(calculateBalance(allTransactions));
+      showTransactions();
     });
   }
 
