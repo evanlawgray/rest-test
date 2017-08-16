@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: $base-font-size;
+  font-weight: bold;
+  font-family: "Arimo", "Open Sans", Arial, sans-serif;
+}
+
+.content-wrapper {
+  height: auto;
+  width: 100%;
+}
+
+.page-header {
+  height: 80px;
+  width: 100%;
+  background: $color__brand-green;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-info {
+  height: auto;
+  width:95%;
+  margin: 20px auto;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+
+  .date, .balance {
+    width: 10%;
+  }
+
+  .company, .account {
+    width: 40%;
+  }
+
+  .date, .company, .account {
+    text-align: left;
+  }
+
+  .balance {
+    text-align: right;
+  }
+}
+
+.table-header {
+  color: $color__brand-green;
+  background-color: #FFF;
+  padding: 20px 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+}
