@@ -6,6 +6,30 @@ $(function() {
 
   let allTransactions = [];
 
+  function calculateBalance(transactions) {
+    const finalBalance = transactions.reduce((balance, transaction) => {
+    const amount = parseFloat(transaction.Amount)
+
+    if(typeof amount === 'number') {
+    return balance += amount;
+    } else {
+    return balance;
+    }
+    }, 0)
+
+    return finalBalance;
+  }
+
+function showBalance(balance) {
+  const balanceReadout = $('#balance-readout')
+
+  if(balance >= 0) {
+  balanceReadout.empty().append(`<span class="green">$ ${balance}</span>`);
+  } else {
+  balanceReadout.empty().append(`<span class="red">$ ${balance}</span>`);
+  }
+}
+
   function getRemainingPages(totalPages, pagePromises) {
     for(let i = 1; i < totalPages; i++ ) {
           const pagePromise = fetch(`${apiRoot}${i + 1}.json`)
@@ -27,7 +51,7 @@ $(function() {
       return transactions;
     }).then(transactions => {
       allTransactions = [...transactions];
-      console.log(allTransactions);
+      showBalance(calculateBalance(allTransactions));
     });
   }
 
