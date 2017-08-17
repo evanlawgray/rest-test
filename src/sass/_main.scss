@@ -23,6 +23,7 @@ body {
 }
 
 .account-info {
+  overflow: hidden;
   height: auto;
   width:95%;
   margin: 20px auto;
@@ -50,7 +51,6 @@ body {
   color: $color__brand-green;
   background-color: #FFF;
   border-bottom: 1px solid $color__brand-grey;
-  box-shadow: 0 20px 20px -10px rgba(0, 0, 0, 0.1);
   padding: 20px 30px;
   display: flex;
   flex-flow: row nowrap;
@@ -74,7 +74,16 @@ body {
     color: darkgray;
   }
 
-  &::last-child {
+  .balance {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+  }
+
+  &:nth-child(2) {
+    box-shadow: inset 0 10px 35px -10px rgba(0, 0, 0, 0.05);
+  }
+
+  &:last-child {
     border-bottom: 0;
   }
 

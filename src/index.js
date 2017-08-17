@@ -44,7 +44,7 @@ $(function() {
                                     <p class="date">${allTransactions[i].Date}</p>
                                     <p class="company">${allTransactions[i].Company}</p>
                                     <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
-                                    <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                    <p class="balance">$${allTransactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
         } else {
@@ -52,7 +52,7 @@ $(function() {
                                     <p class="date">${allTransactions[i].Date}</p>
                                     <p class="company">${allTransactions[i].Company}</p>
                                     <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
-                                    <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                    <p class="balance">$${allTransactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
         }
