@@ -1,5 +1,6 @@
 require('./sass/style.scss');
-const $ = require("jquery");
+const $ = require('jquery');
+const moment = require('moment');
 
 $(function() {
   const apiRoot = "http://resttest.bench.co/transactions/";
@@ -35,23 +36,30 @@ $(function() {
     return ledgerData.split(',').join('<span class="arrow">&#9657</span>');
   }
 
+  function formatDate(date) {
+    return moment(date).format('MMM Do, YYYY');
+  }
+
   function showTransactions() {
     const transactionsTable = $('.account-info');
 
     for(let i = 1; i < allTransactions.length; i++ ) {
+      const formattedDate = formatDate(allTransactions[i].Date);
+      const formattedLedger = formatLedgerData(allTransactions[i].Ledger);
+
       if(i % 2 === 0) {
         let transactionElement = `<div class="table-row green">
-                                    <p class="date">${allTransactions[i].Date}</p>
+                                    <p class="date">${formattedDate}</p>
                                     <p class="company">${allTransactions[i].Company}</p>
-                                    <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                    <p class="account">${formattedLedger}</p>
                                     <p class="balance">$${allTransactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
         } else {
         let transactionElement = `<div class="table-row">
-                                    <p class="date">${allTransactions[i].Date}</p>
+                                    <p class="date">${formattedDate}</p>
                                     <p class="company">${allTransactions[i].Company}</p>
-                                    <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                    <p class="account">${formattedLedger}</p>
                                     <p class="balance">$${allTransactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
