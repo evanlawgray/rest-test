@@ -22,7 +22,15 @@ body {
   align-items: center;
 }
 
+.loading-indicator {
+  height: 80px;
+  width: 80px;
+  margin: 50px auto;
+  display: block;
+}
+
 .account-info {
+  display: none;
   overflow: hidden;
   height: auto;
   width:95%;

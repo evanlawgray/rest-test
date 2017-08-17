@@ -25,9 +25,9 @@ $(function() {
     const balanceReadout = $('#balance-readout')
 
     if(balance >= 0) {
-    balanceReadout.empty().append(`<span class="green">$ ${balance}</span>`);
+    balanceReadout.empty().append(`<span class="green">$${balance}</span>`);
     } else {
-    balanceReadout.empty().append(`<span class="red">$ ${balance}</span>`);
+    balanceReadout.empty().append(`<span class="red">$${balance}</span>`);
     }
   }
 
@@ -42,6 +42,7 @@ $(function() {
   }
 
   function showTransactions() {
+    const loadingIndicator = $('.loading-indicator');
     const transactionsTable = $('.account-info');
 
     for(let i = 1; i < allTransactions.length; i++ ) {
@@ -57,15 +58,17 @@ $(function() {
                                   </div>`
         transactionsTable.append(transactionElement)
       } else {
-          let transactionElement = `<div class="table-row">
-                                      <p class="date">${formattedDate}</p>
-                                      <p class="company">${allTransactions[i].Company}</p>
-                                      <p class="account">${formattedLedger}</p>
-                                      <p class="balance">$${allTransactions[i].Amount}</p>
-                                    </div>`
-          transactionsTable.append(transactionElement)
-        }
+        let transactionElement = `<div class="table-row">
+                                    <p class="date">${formattedDate}</p>
+                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="account">${formattedLedger}</p>
+                                    <p class="balance">$${allTransactions[i].Amount}</p>
+                                  </div>`
+        transactionsTable.append(transactionElement)
+      }
     }
+    loadingIndicator.hide();
+    transactionsTable.show()
   }
 
   function getRemainingPages(totalPages, pagePromises) {
