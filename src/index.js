@@ -5,8 +5,6 @@ const moment = require('moment');
 $(function() {
   const apiRoot = 'http://resttest.bench.co/transactions/';
 
-  let allTransactions = [];
-
   function calculateBalance(transactions) {
     const finalBalance = transactions.reduce((balance, transaction) => {
       const amount = parseFloat(transaction.Amount)
@@ -25,44 +23,44 @@ $(function() {
     const balanceReadout = $('#balance-readout')
 
     if(balance >= 0) {
-    balanceReadout.empty().append(`<span class="green">$${balance}</span>`);
+      balanceReadout.empty().append(`<span class="green">$${balance}</span>`);
     } else {
-    balanceReadout.empty().append(`<span class="red">$${balance}</span>`);
+      balanceReadout.empty().append(`<span class="red">$${balance}</span>`);
     }
   }
 
   function formatLedgerData(ledgerData) {
-    if (!ledgerData) return 'N/A';
+    if(!ledgerData) return 'N/A';
     return ledgerData.split(',').join('<span class="arrow">&#9657</span>');
   }
 
   function formatDate(date) {
-    if (!date) return 'N/A';
+    if(!date) return 'N/A';
     return moment(date).format('MMM Do, YYYY');
   }
 
-  function showTransactions() {
+  function showTransactions(transactions) {
     const loadingIndicator = $('.loading-indicator');
     const transactionsTable = $('.account-info');
 
-    for(let i = 0; i < allTransactions.length; i++ ) {
-      const formattedDate = formatDate(allTransactions[i].Date);
-      const formattedLedger = formatLedgerData(allTransactions[i].Ledger);
+    for(let i = 0; i < transactions.length; i++ ) {
+      const formattedDate = formatDate(transactions[i].Date);
+      const formattedLedger = formatLedgerData(transactions[i].Ledger);
 
-      if(i % 2 === 0 && allTransactions[i]) {
+      if(i % 2 === 0 && transactions[i]) {
         let transactionElement = `<div class="table-row green">
                                     <p class="date">${formattedDate}</p>
-                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="company">${transactions[i].Company}</p>
                                     <p class="account">${formattedLedger}</p>
-                                    <p class="balance">$${allTransactions[i].Amount}</p>
+                                    <p class="balance">$${transactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
       } else {
         let transactionElement = `<div class="table-row">
                                     <p class="date">${formattedDate}</p>
-                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="company">${transactions[i].Company}</p>
                                     <p class="account">${formattedLedger}</p>
-                                    <p class="balance">$${allTransactions[i].Amount}</p>
+                                    <p class="balance">$${transactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
       }
@@ -90,10 +88,10 @@ $(function() {
         transactions = [...transactions, ...page.transactions];
       });
       return transactions;
-    }).then(transactions => {
-      allTransactions = [...transactions];
-      showBalance(calculateBalance(allTransactions));
-      showTransactions();
+    })
+    .then(transactions => {
+      showBalance(calculateBalance(transactions));
+      showTransactions(transactions);
     });
   }
 
@@ -107,14 +105,26 @@ $(function() {
     })
     .then(json => {
       const page1 = json;
-      const totalPages = (page1.totalCount.toString().slice(0, 1) * 1) + 1;
+      let totalPages;
+
+      // Since each page contains a maximum of 10 entries,
+      // the total number of available pages is calculated by looking at the total number of entries.
+      // If there are ten or fewer entries, totalPages is set to 1.
+      // If there are more than ten, the total number of entries is divided by ten, then rounded up
+      // to find the total number of pages.
+
+      if(page1.totalCount <= 10) {
+        totalPages = 1;
+      } else {
+        totalPages = Math.ceil(page1.totalCount / 10);
+      }
 
       let transactions = page1.transactions.map( data => data);
       let pagePromises = [];
 
       resolvePages(getRemainingPages(totalPages, pagePromises), transactions);
 
-      return allTransactions;
+      return transactions;
     });
   }
 
