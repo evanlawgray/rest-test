@@ -3,19 +3,19 @@ const $ = require('jquery');
 const moment = require('moment');
 
 $(function() {
-  const apiRoot = "http://resttest.bench.co/transactions/";
+  const apiRoot = 'http://resttest.bench.co/transactions/';
 
   let allTransactions = [];
 
   function calculateBalance(transactions) {
     const finalBalance = transactions.reduce((balance, transaction) => {
-    const amount = parseFloat(transaction.Amount)
+      const amount = parseFloat(transaction.Amount)
 
-    if(typeof amount === 'number') {
-    return balance += amount;
-    } else {
-    return balance;
-    }
+      if(typeof amount === 'number') {
+        return balance += amount;
+      } else {
+        return balance;
+      }
     }, 0)
 
     return finalBalance;
@@ -37,6 +37,7 @@ $(function() {
   }
 
   function formatDate(date) {
+    if (!date) return 'N/A';
     return moment(date).format('MMM Do, YYYY');
   }
 
@@ -47,7 +48,7 @@ $(function() {
       const formattedDate = formatDate(allTransactions[i].Date);
       const formattedLedger = formatLedgerData(allTransactions[i].Ledger);
 
-      if(i % 2 === 0) {
+      if(i % 2 === 0 && allTransactions[i]) {
         let transactionElement = `<div class="table-row green">
                                     <p class="date">${formattedDate}</p>
                                     <p class="company">${allTransactions[i].Company}</p>
@@ -55,28 +56,28 @@ $(function() {
                                     <p class="balance">$${allTransactions[i].Amount}</p>
                                   </div>`
         transactionsTable.append(transactionElement)
-        } else {
-        let transactionElement = `<div class="table-row">
-                                    <p class="date">${formattedDate}</p>
-                                    <p class="company">${allTransactions[i].Company}</p>
-                                    <p class="account">${formattedLedger}</p>
-                                    <p class="balance">$${allTransactions[i].Amount}</p>
-                                  </div>`
-        transactionsTable.append(transactionElement)
+      } else {
+          let transactionElement = `<div class="table-row">
+                                      <p class="date">${formattedDate}</p>
+                                      <p class="company">${allTransactions[i].Company}</p>
+                                      <p class="account">${formattedLedger}</p>
+                                      <p class="balance">$${allTransactions[i].Amount}</p>
+                                    </div>`
+          transactionsTable.append(transactionElement)
         }
     }
   }
 
   function getRemainingPages(totalPages, pagePromises) {
     for(let i = 1; i < totalPages; i++ ) {
-          const pagePromise = fetch(`${apiRoot}${i + 1}.json`)
-          .then(response => {
-            if (!response.ok) return Promise.reject()
-            return response.json()
-          })
-        pagePromises.push(pagePromise)
-      }
-      return pagePromises;
+      const pagePromise = fetch(`${apiRoot}${i + 1}.json`)
+                          .then(response => {
+                            if (!response.ok) return Promise.reject()
+                            return response.json()
+                          });
+      pagePromises.push(pagePromise)
+    }
+    return pagePromises;
   }
 
   function resolvePages(pagePromises, transactions) {
