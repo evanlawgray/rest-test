@@ -67,19 +67,19 @@ $(function() {
 
       if(i % 2 === 0 && transactions[i]) {
         const transactionElement = `<div class="table-row green">
-                                    <p class="date">${formattedDate}</p>
-                                    <p class="company">${transactions[i].Company}</p>
-                                    <p class="account">${formattedLedger}</p>
-                                    <p class="balance">$${transactions[i].Amount}</p>
-                                  </div>`
+                                      <p class="date">${formattedDate}</p>
+                                      <p class="company">${transactions[i].Company}</p>
+                                      <p class="account">${formattedLedger}</p>
+                                      <p class="balance">$${transactions[i].Amount}</p>
+                                    </div>`
         transactionsTable.append(transactionElement)
       } else {
         const transactionElement = `<div class="table-row">
-                                    <p class="date">${formattedDate}</p>
-                                    <p class="company">${transactions[i].Company}</p>
-                                    <p class="account">${formattedLedger}</p>
-                                    <p class="balance">$${transactions[i].Amount}</p>
-                                  </div>`
+                                      <p class="date">${formattedDate}</p>
+                                      <p class="company">${transactions[i].Company}</p>
+                                      <p class="account">${formattedLedger}</p>
+                                      <p class="balance">$${transactions[i].Amount}</p>
+                                    </div>`
         transactionsTable.append(transactionElement)
       }
     }
