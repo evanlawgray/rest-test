@@ -90,8 +90,42 @@ $(function () {
   }
 
   function showBalance(balance) {
-    const balanceReadout = document.getElementById('balance');
-    balanceReadout.innerHTML = balance;
+    const balanceReadout = $('#balance-readout');
+
+    if (balance >= 0) {
+      balanceReadout.empty().append(`<span class="green">$ ${balance}</span>`);
+    } else {
+      balanceReadout.empty().append(`<span class="red">$ ${balance}</span>`);
+    }
+  }
+
+  function formatLedgerData(ledgerData) {
+    if (!ledgerData) return 'N/A';
+    return ledgerData.split(',').join('&#9657');
+  }
+
+  function showTransactions() {
+    const transactionsTable = $('.account-info');
+
+    for (let i = 1; i < allTransactions.length; i++) {
+      if (i % 2 === 0) {
+        let transactionElement = `<div class="table-row green">
+                                  <p class="date">${allTransactions[i].Date}</p>
+                                  <p class="company">${allTransactions[i].Company}</p>
+                                  <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                  <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                </div>`;
+        transactionsTable.append(transactionElement);
+      } else {
+        let transactionElement = `<div class="table-row">
+                                    <p class="date">${allTransactions[i].Date}</p>
+                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                    <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                  </div>`;
+        transactionsTable.append(transactionElement);
+      }
+    }
   }
 
   function getRemainingPages(totalPages, pagePromises) {
@@ -113,8 +147,8 @@ $(function () {
       return transactions;
     }).then(transactions => {
       allTransactions = [...transactions];
-
       showBalance(calculateBalance(allTransactions));
+      showTransactions();
     });
   }
 
@@ -180,7 +214,7 @@ exports = module.exports = __webpack_require__(3)(undefined);
 
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1;\n  height: 100vh;\n  width: 100vw;\n  background: #EFEDE8;\n  color: #000; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\n* {\n  box-sizing: border-box; }\n\nbody {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Arimo\", \"Open Sans\", Arial, sans-serif; }\n\n.content-wrapper {\n  height: auto;\n  width: 100%; }\n\n.page-header {\n  height: 80px;\n  width: 100%;\n  background: #098B8C;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.account-info {\n  height: auto;\n  width: 95%;\n  margin: 20px auto;\n  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);\n  border-radius: 2px; }\n  .account-info .date, .account-info .balance {\n    width: 10%; }\n  .account-info .company, .account-info .account {\n    width: 40%; }\n  .account-info .date, .account-info .company, .account-info .account {\n    text-align: left; }\n  .account-info .balance {\n    text-align: right; }\n\n.table-header {\n  color: #098B8C;\n  background-color: #FFF;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1;\n  height: 100vh;\n  width: 100vw;\n  background: #EFEDE8;\n  color: #000; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\n* {\n  box-sizing: border-box; }\n\nbody {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Arimo\", \"Open Sans\", Arial, sans-serif; }\n\n.content-wrapper {\n  height: auto;\n  width: 100%; }\n\n.page-header {\n  height: 80px;\n  width: 100%;\n  background: #098B8C;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.account-info {\n  height: auto;\n  width: 95%;\n  margin: 20px auto;\n  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);\n  border-radius: 2px; }\n  .account-info .green {\n    color: #098B8C; }\n  .account-info .date, .account-info .balance {\n    width: 10%; }\n  .account-info .company, .account-info .account {\n    width: 40%; }\n  .account-info .date, .account-info .company, .account-info .account {\n    text-align: left; }\n  .account-info .balance {\n    text-align: right; }\n\n.table-header {\n  color: #098B8C;\n  background-color: #FFF;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .table-header .red {\n    color: red; }\n\n.table-row {\n  background-color: rgba(255, 255, 255, 0.8);\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n", ""]);
 
 // exports
 

@@ -32,7 +32,7 @@ $(function() {
 
   function formatLedgerData(ledgerData) {
     if (!ledgerData) return 'N/A';
-    return ledgerData.split(',').join('&#9657');
+    return ledgerData.split(',').join('<span class="arrow">&#9657</span>');
   }
 
   function showTransactions() {
@@ -41,11 +41,11 @@ $(function() {
     for(let i = 1; i < allTransactions.length; i++ ) {
       if(i % 2 === 0) {
         let transactionElement = `<div class="table-row green">
-                                  <p class="date">${allTransactions[i].Date}</p>
-                                  <p class="company">${allTransactions[i].Company}</p>
-                                  <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
-                                  <p class="balance">$ ${allTransactions[i].Amount}</p>
-                                </div>`
+                                    <p class="date">${allTransactions[i].Date}</p>
+                                    <p class="company">${allTransactions[i].Company}</p>
+                                    <p class="account">${formatLedgerData(allTransactions[i].Ledger)}</p>
+                                    <p class="balance">$ ${allTransactions[i].Amount}</p>
+                                  </div>`
         transactionsTable.append(transactionElement)
         } else {
         let transactionElement = `<div class="table-row">
