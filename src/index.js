@@ -66,7 +66,7 @@ $(function() {
       // but are otherwise identical.
 
       if(i % 2 === 0 && transactions[i]) {
-        let transactionElement = `<div class="table-row green">
+        const transactionElement = `<div class="table-row green">
                                     <p class="date">${formattedDate}</p>
                                     <p class="company">${transactions[i].Company}</p>
                                     <p class="account">${formattedLedger}</p>
@@ -74,7 +74,7 @@ $(function() {
                                   </div>`
         transactionsTable.append(transactionElement)
       } else {
-        let transactionElement = `<div class="table-row">
+        const transactionElement = `<div class="table-row">
                                     <p class="date">${formattedDate}</p>
                                     <p class="company">${transactions[i].Company}</p>
                                     <p class="account">${formattedLedger}</p>
