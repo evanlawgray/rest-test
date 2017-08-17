@@ -91,6 +91,14 @@ body {
   }
 }
 
+.table-row.no-data {
+  font-size: 1rem;
+
+  p {
+    margin: 0 auto;
+  }
+}
+
 .table-row {
   font-size: 0.7rem;
   line-height: 0.8rem;

@@ -22,10 +22,15 @@ $(function() {
   function showBalance(balance) {
     const balanceReadout = $('#balance-readout')
 
+    if(!balance) {
+      balanceReadout.empty().append('<span class="green">N/A</span>');
+      return;
+    }
+
     // If the user's account balance is negative, it is displayed in red,
     // if it is positive, it is displayed with the normal green colour.
 
-    if(balance >= 0) {
+    if(balance >= 0 ) {
       balanceReadout.empty().append(`<span class="green">$${balance}</span>`);
     } else {
       balanceReadout.empty().append(`<span class="red">$${balance}</span>`);
@@ -45,6 +50,13 @@ $(function() {
   function showTransactions(transactions) {
     const loadingIndicator = $('.loading-indicator');
     const transactionsTable = $('.account-info');
+
+    if(transactions.length === 0) {
+      const placeholderElement = `<div class="table-row no-data">
+                                    <p>No transactions to display</p>
+                                  </div>`;
+      transactionsTable.append(placeholderElement);
+    }
 
     for(let i = 0; i < transactions.length; i++ ) {
       const formattedDate = formatDate(transactions[i].Date);
@@ -82,29 +94,41 @@ $(function() {
     for(let i = 1; i < totalPages; i++ ) {
       const pagePromise = fetch(`${apiRoot}${i + 1}.json`)
                           .then(response => {
-                            if (!response.ok) return Promise.reject()
+                            if (!response.ok) {
+                              throw Error(response.statusText);
+                            }
                             return response.json()
-                          });
+                          }).catch(error => console.log(error));
       pagePromises.push(pagePromise)
     }
     return pagePromises;
   }
 
-  // This function builds the complete list of all transactions,
+  // The below function builds the complete list of all transactions,
   // then calls the showBalance and showTransactions functions that render transaction
-  // data to the page, so that it can be seen by the user.
+  // data to the page.
+  // If API calls for pages beyond page 1 fail, the first page of transaction data is still
+  // returned and rendered to the page.
 
   function resolvePages(pagePromises, transactions) {
     Promise.all(pagePromises)
+    .catch(error => {
+      console.log(error);
+    })
     .then( pages => {
       pages.forEach(page => {
-        transactions = [...transactions, ...page.transactions];
+        if(page) {
+          transactions = [...transactions, ...page.transactions];
+        } else {
+          return;
+        }
       });
       return transactions;
     })
     .then(transactions => {
       showBalance(calculateBalance(transactions));
       showTransactions(transactions);
+      return transactions;
     });
   }
 
@@ -116,7 +140,7 @@ $(function() {
     fetch(`${apiRoot}1.json`)
     .then(response => {
       if (!response.ok) {
-        return Promise.reject()
+        throw Error(response.statusText);
       }
       return response.json();
     })
@@ -142,7 +166,7 @@ $(function() {
       resolvePages(getRemainingPages(totalPages, pagePromises), transactions);
 
       return transactions;
-    });
+    }).catch(error => console.log(error));
   }
 
   getTransactions();
