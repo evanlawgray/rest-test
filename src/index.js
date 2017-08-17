@@ -22,6 +22,9 @@ $(function() {
   function showBalance(balance) {
     const balanceReadout = $('#balance-readout')
 
+    // If the user's account balance is negative, it is displayed in red,
+    // if it is positive, it is displayed with the normal green colour.
+
     if(balance >= 0) {
       balanceReadout.empty().append(`<span class="green">$${balance}</span>`);
     } else {
@@ -47,6 +50,9 @@ $(function() {
       const formattedDate = formatDate(transactions[i].Date);
       const formattedLedger = formatLedgerData(transactions[i].Ledger);
 
+      // Even numbered table rows use green colour for font, as per design specifications,
+      // but are otherwise identical.
+
       if(i % 2 === 0 && transactions[i]) {
         let transactionElement = `<div class="table-row green">
                                     <p class="date">${formattedDate}</p>
@@ -69,6 +75,9 @@ $(function() {
     transactionsTable.show()
   }
 
+  // The below function fetches data for the remaining pages after the first page of data has been fetched.
+  // It returns an array of promises, which are then processed by the resolvePages function.
+
   function getRemainingPages(totalPages, pagePromises) {
     for(let i = 1; i < totalPages; i++ ) {
       const pagePromise = fetch(`${apiRoot}${i + 1}.json`)
@@ -80,6 +89,10 @@ $(function() {
     }
     return pagePromises;
   }
+
+  // This function builds the complete list of all transactions,
+  // then calls the showBalance and showTransactions functions that render transaction
+  // data to the page, so that it can be seen by the user.
 
   function resolvePages(pagePromises, transactions) {
     Promise.all(pagePromises)
@@ -94,6 +107,10 @@ $(function() {
       showTransactions(transactions);
     });
   }
+
+  // This function fetches data from the first API endpoint, then determines how many more API
+  // calls will be needed to fetch the rest of the data. It represents the starting point of the
+  // application's control flow.
 
   function getTransactions() {
     fetch(`${apiRoot}1.json`)
