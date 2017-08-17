@@ -45,7 +45,7 @@ $(function() {
     const loadingIndicator = $('.loading-indicator');
     const transactionsTable = $('.account-info');
 
-    for(let i = 1; i < allTransactions.length; i++ ) {
+    for(let i = 0; i < allTransactions.length; i++ ) {
       const formattedDate = formatDate(allTransactions[i].Date);
       const formattedLedger = formatLedgerData(allTransactions[i].Ledger);
 

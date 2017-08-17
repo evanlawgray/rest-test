@@ -1896,7 +1896,7 @@ function loadLocale(name) {
             module && module.exports) {
         try {
             oldLocale = globalLocale._abbr;
-            __webpack_require__(125)("./" + name);
+            __webpack_require__(124)("./" + name);
             // because defineLocale currently also sets the global locale, we
             // want to undo that for lazy loaded locales
             getSetGlobalLocale(oldLocale);
@@ -4531,7 +4531,7 @@ return hooks;
 
 })));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(124)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(123)(module)))
 
 /***/ }),
 /* 1 */
@@ -15618,7 +15618,7 @@ return zhTw;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(117);
-const $ = __webpack_require__(123);
+const $ = __webpack_require__(122);
 const moment = __webpack_require__(0);
 
 $(function () {
@@ -15751,7 +15751,7 @@ var transform;
 var options = {}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(121)(content, options);
+var update = __webpack_require__(120)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -15776,7 +15776,7 @@ exports = module.exports = __webpack_require__(119)(undefined);
 
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1;\n  min-height: 100vh;\n  width: 100vw;\n  background: #EFEDE8;\n  color: #000; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\n* {\n  box-sizing: border-box; }\n\nbody {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Arimo\", \"Open Sans\", Arial, sans-serif; }\n\n.content-wrapper {\n  height: auto;\n  width: 100%; }\n\n.page-header {\n  height: 80px;\n  width: 100%;\n  background: #098B8C;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.loading-indicator {\n  background: url(" + __webpack_require__(120) + ") center cover;\n  height: 10%;\n  width: 10%;\n  min-height: 80px;\n  min-width: 80px;\n  margin: 30% auto;\n  display: block; }\n\n.account-info {\n  display: none;\n  overflow: hidden;\n  height: auto;\n  width: 95%;\n  margin: 20px auto;\n  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);\n  border-radius: 2px; }\n  .account-info .date, .account-info .balance {\n    width: 10%; }\n  .account-info .company, .account-info .account {\n    width: 40%; }\n  .account-info .date, .account-info .company, .account-info .account {\n    text-align: left; }\n  .account-info .balance {\n    text-align: right; }\n\n.table-header {\n  color: #098B8C;\n  background-color: #FFF;\n  border-bottom: 1px solid #EFEDE8;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .table-header .red {\n    color: red; }\n\n.table-row {\n  font-size: 0.8rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  border-bottom: 1px solid #EFEDE8;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .table-row .date, .table-row .account {\n    color: darkgray; }\n  .table-row .balance {\n    font-size: 1rem;\n    letter-spacing: 0.5px; }\n  .table-row:nth-child(2) {\n    box-shadow: inset 0 10px 35px -10px rgba(0, 0, 0, 0.05); }\n  .table-row:last-child {\n    border-bottom: 0; }\n  .table-row .arrow {\n    margin: 0 20px; }\n\n.table-row.green p {\n  color: #098B8C; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1;\n  min-height: 100vh;\n  width: 100vw;\n  background: #EFEDE8;\n  color: #000; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\n* {\n  box-sizing: border-box; }\n\nbody {\n  font-size: 16px;\n  font-weight: bold;\n  font-family: \"Arimo\", \"Open Sans\", Arial, sans-serif; }\n\n.content-wrapper {\n  height: auto;\n  width: 100%; }\n\n.page-header {\n  height: 80px;\n  width: 100%;\n  background: #098B8C;\n  display: flex;\n  justify-content: center;\n  align-items: center; }\n\n.loading-indicator {\n  height: 80px;\n  width: 80px;\n  margin: 50px auto;\n  display: block; }\n\n.account-info {\n  display: none;\n  overflow: hidden;\n  height: auto;\n  width: 95%;\n  margin: 20px auto;\n  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);\n  border-radius: 2px; }\n  .account-info .date, .account-info .balance {\n    width: 10%; }\n  .account-info .company, .account-info .account {\n    width: 40%; }\n  .account-info .date, .account-info .company, .account-info .account {\n    text-align: left; }\n  .account-info .balance {\n    text-align: right; }\n\n.table-header {\n  color: #098B8C;\n  background-color: #FFF;\n  border-bottom: 1px solid #EFEDE8;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .table-header .red {\n    color: red; }\n\n.table-row {\n  font-size: 0.8rem;\n  background-color: rgba(255, 255, 255, 0.8);\n  border-bottom: 1px solid #EFEDE8;\n  padding: 20px 30px;\n  display: flex;\n  flex-flow: row nowrap;\n  justify-content: flex-start; }\n  .table-row .date, .table-row .account {\n    color: darkgray; }\n  .table-row .balance {\n    font-size: 1rem;\n    letter-spacing: 0.5px; }\n  .table-row:nth-child(2) {\n    box-shadow: inset 0 10px 35px -10px rgba(0, 0, 0, 0.05); }\n  .table-row:last-child {\n    border-bottom: 0; }\n  .table-row .arrow {\n    margin: 0 20px; }\n\n.table-row.green p {\n  color: #098B8C; }\n", ""]);
 
 // exports
 
@@ -15867,12 +15867,6 @@ function toComment(sourceMap) {
 /* 120 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__.p + "public/assets/images/ajax-loader.gif";
-
-/***/ }),
-/* 121 */
-/***/ (function(module, exports, __webpack_require__) {
-
 /*
 	MIT License http://www.opensource.org/licenses/mit-license.php
 	Author Tobias Koppers @sokra
@@ -15916,7 +15910,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(122);
+var	fixUrls = __webpack_require__(121);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -16229,7 +16223,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 122 */
+/* 121 */
 /***/ (function(module, exports) {
 
 
@@ -16324,7 +16318,7 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 123 */
+/* 122 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -26584,7 +26578,7 @@ return jQuery;
 
 
 /***/ }),
-/* 124 */
+/* 123 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -26612,7 +26606,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 125 */
+/* 124 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
@@ -26861,7 +26855,7 @@ webpackContext.keys = function webpackContextKeys() {
 };
 webpackContext.resolve = webpackContextResolve;
 module.exports = webpackContext;
-webpackContext.id = 125;
+webpackContext.id = 124;
 
 /***/ })
 /******/ ]);
